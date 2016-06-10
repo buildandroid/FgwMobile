@@ -3,12 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context="fragment.GongWenChaXunTabButtonFragment">
+    tools:context="fragment.GwqpTabButtonFragment">
 
     <FrameLayout
         android:layout_width="96dp"
         android:layout_height="96dp"
-        android:background="@drawable/gongwen_chaxun_tab_btn_bg">
+        android:background="@drawable/gwqp_btn_bg"
+        android:clickable="true"
+        android:focusable="true"
+        android:id="@+id/gwqp_button">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -19,13 +23,15 @@
                 android:layout_height="36dp"
                 android:src="@drawable/all"
                 android:layout_marginBottom="10dp"
+                android:id="@+id/gwqp_btn_icon"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/prompt_all"
                 android:textSize="16sp"
-                android:textColor="@color/gongwen_chaxun_foreground"/>
+                android:textColor="@color/gwqp_foreground"
+                android:id="@+id/gwqp_btn_txt"/>
         </LinearLayout>
     </FrameLayout>
 

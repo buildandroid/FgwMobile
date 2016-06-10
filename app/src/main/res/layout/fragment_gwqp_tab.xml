@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context="fragment.GongWenChaXunTabFragment">
+    tools:context="fragment.GwqpTabFragment">
     <fragment
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:name="fragment.GongWenChaXunTabButtonFragment"
-        tools:layout="@layout/fragment_gong_wen_cha_xun_tab_button"
+        android:name="fragment.GwqpTabButtonFragment"
+        tools:layout="@layout/fragment_gwqp_tab_button"
         android:tag="all"
         />
 

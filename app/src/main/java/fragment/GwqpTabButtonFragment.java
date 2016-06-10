@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fgwoa.fgwmobile.R;
@@ -14,12 +16,12 @@ import com.example.fgwoa.fgwmobile.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link GongWenChaXunTabButtonFragment.OnFragmentInteractionListener} interface
+ * {@link GwqpTabButtonFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link GongWenChaXunTabButtonFragment#newInstance} factory method to
+ * Use the {@link GwqpTabButtonFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GongWenChaXunTabButtonFragment extends Fragment {
+public class GwqpTabButtonFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,8 +32,11 @@ public class GongWenChaXunTabButtonFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private FrameLayout mGwqpTabBtn;
+    private ImageView mGwqpTabBtnIcon;
+    private TextView mGwqpTabBtnTxt;
 
-    public GongWenChaXunTabButtonFragment() {
+    public GwqpTabButtonFragment() {
         // Required empty public constructor
     }
 
@@ -44,8 +49,8 @@ public class GongWenChaXunTabButtonFragment extends Fragment {
      * @return A new instance of fragment GongWenChaXunTabButtonFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static GongWenChaXunTabButtonFragment newInstance(String param1, String param2) {
-        GongWenChaXunTabButtonFragment fragment = new GongWenChaXunTabButtonFragment();
+    public static GwqpTabButtonFragment newInstance(String param1, String param2) {
+        GwqpTabButtonFragment fragment = new GwqpTabButtonFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -66,9 +71,36 @@ public class GongWenChaXunTabButtonFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        TextView tv;
-        return inflater.inflate(R.layout.fragment_gong_wen_cha_xun_tab_button, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_gwqp_tab_button, container, false);
+        mGwqpTabBtn = (FrameLayout)rootView.findViewById(R.id.gwqp_button);
+        initGwqpTabButton();
+        mGwqpTabBtnIcon = (ImageView)rootView.findViewById(R.id.gwqp_btn_icon);
+        mGwqpTabBtnTxt = (TextView)rootView.findViewById(R.id.gwqp_btn_txt);
+
+        return rootView;
     }
+
+    private void initGwqpTabButton() {
+        mGwqpTabBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean newState = !mGwqpTabBtn.isSelected();
+                mGwqpTabBtn.setSelected(newState);
+                mGwqpTabBtnIcon.setSelected(newState);
+                mGwqpTabBtnTxt.setSelected(newState);
+                changeGwqpTabBtnIconColor();
+            }
+        });
+    }
+
+    private void changeGwqpTabBtnIconColor(){
+        if(mGwqpTabBtnIcon.isSelected()){
+            mGwqpTabBtnIcon.setColorFilter(getResources().getColor(R.color.colorPrimary));
+        }else{
+            mGwqpTabBtnIcon.setColorFilter(getResources().getColor(R.color.colorWhite));
+        }
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

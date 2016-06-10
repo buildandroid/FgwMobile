@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:tag="tab"
-        android:name="fragment.GongWenChaXunTabFragment"
-        tools:layout="@layout/fragment_gong_wen_cha_xun_tab"
+        android:name="fragment.GwqpTabFragment"
+        tools:layout="@layout/fragment_gwqp_tab"
         />
 </LinearLayout>
