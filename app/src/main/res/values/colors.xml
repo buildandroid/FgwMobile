@@ -12,6 +12,9 @@
     <color name="colorButton_1">#0F5FD2</color>
     <color name="colorButton_2">#FFFFFF</color>
     <color name="colorListText">#3D3C3C</color>
+    <color name="login_background">#3d000000</color>
+    <color name="login_background_border">#3dffffff</color>
+
     <color name="colorPishiLine">#93c2fb</color>
     <color name="colorPishiTitle">#1266d6</color>
     <color name="colorBlack">#000000</color>
