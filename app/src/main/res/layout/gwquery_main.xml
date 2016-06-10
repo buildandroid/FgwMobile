@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/prompt_gw"
+        android:textSize="30dp"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <RadioGroup
+        android:id="@+id/gw_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton
+            android:id="@+id/gw_receive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/prompt_receive"
+
+            />
+
+        <RadioButton
+            android:id="@+id/gw_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/prompt_send"
+            />
+
+        <RadioButton
+            android:id="@+id/gw_sign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/prompt_sign"
+            />
+
+        <RadioButton
+            android:id="@+id/gw_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/prompt_all"
+            />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/gw_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton
+            android:id="@+id/gw_pend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/prompt_pend"
+            />
+
+        <RadioButton
+            android:id="@+id/gw_approve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/prompt_approve"
+            />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/gw_pageNum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/prompt_pageNum"
+        />
+
+    <EditText
+        android:id="@+id/gw_pageSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/prompt_pageSize"
+        />
+
+    <EditText
+        android:id="@+id/gw_keyword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/prompt_keyword"
+        />
+
+    <Button
+        android:id="@+id/gw_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/prompt_check"
+        />
+
+</LinearLayout>

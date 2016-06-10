@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="885dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="126dp"
+        android:layout_marginTop="12dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="73dp"
+            android:orientation="horizontal"
+            >
+            
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="42dp"
+                android:text="@string/prompt_pend"
+                android:background="@drawable/leftbutton_corner"
+                android:layout_marginLeft="58dp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorBlue"
+                android:textSize="20dp"
+                />
+
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="42dp"
+                android:text="@string/prompt_approve"
+                android:background="@drawable/rightbutton_corner"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorWhite"
+                android:textSize="20dp"
+                />
+            
+            <EditText
+                android:layout_width="520dp"
+                android:layout_height="35dp"
+                android:hint="@string/prompt_search"
+                android:layout_marginLeft="69dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="20dp"
+                android:textColor="@color/colorText"
+                android:background="@drawable/edittext_corner"
+                android:gravity="center"
+                />
+
+            <Button
+                android:layout_width="52dp"
+                android:layout_height="35dp"
+                android:text="@string/prompt_searchButton"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/rightbutton_corner"
+
+                />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/gw_list"
+            android:layout_width="885dp"
+            android:layout_height="match_parent"
+            >
+        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="126dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="12dp"
+            >
+
+            <Button
+                android:id="@+id/button_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_corner"
+                android:text="@string/prompt_all"
+                android:textSize="16dp"
+                android:textColor="#FFFFFF"
+                />
+            <View
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:background="#ff0000"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="1dp"
+                />
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/button_receive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_corner"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/prompt_receive"
+            android:textSize="16dp"
+            android:textColor="#FFFFFF"
+            android:paddingBottom="18dp"
+            />
+
+        <Button
+            android:id="@+id/button_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_corner"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/prompt_send"
+            android:textSize="16dp"
+            android:textColor="#FFFFFF"
+            android:paddingBottom="18dp"
+            />
+
+        <Button
+            android:id="@+id/button_sign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_corner"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/prompt_sign"
+            android:textSize="16dp"
+            android:textColor="#FFFFFF"
+            android:paddingBottom="18dp"
+            />
+    </LinearLayout>
+
+</RelativeLayout>
