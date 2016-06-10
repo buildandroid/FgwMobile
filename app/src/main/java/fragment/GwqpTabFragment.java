@@ -1,14 +1,19 @@
 package fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fgwoa.fgwmobile.R;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,7 +23,7 @@ import com.example.fgwoa.fgwmobile.R;
  * Use the {@link GwqpTabFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GwqpTabFragment extends Fragment {
+public class GwqpTabFragment extends Fragment implements GwqpTabButtonFragment.OnTabSelectedListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -59,13 +64,15 @@ public class GwqpTabFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_gwqp_tab, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_gwqp_tab, container, false);
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,5 +112,26 @@ public class GwqpTabFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+//    private void initTabButtonFragment(){
+//        FragmentManager fragmentManager = getFragmentManager();
+//        List<Fragment> fragments = fragmentManager.getFragments();
+//        for(Fragment fragment:fragments){
+//            if(fragment instanceof GwqpTabButtonFragment){
+//                ((GwqpTabButtonFragment)fragment).setOnTabSelectedListener(this);
+//            }
+//        }
+//    }
+
+    @Override
+    public void onTabSelected(Fragment fragment) {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        for(Fragment frg:fragmentManager.getFragments()){
+            if(frg instanceof GwqpTabButtonFragment){
+                ((GwqpTabButtonFragment)frg).setSelected(frg.equals(fragment));
+            }
+        }
+
     }
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GwrpTabButtonFragment">
+        <attr name="gwrp_icon" format="reference"/>
+        <attr name="gwrp_text" format="reference"/>
+        <attr name="gwrp_selected" format="boolean" />
+    </declare-styleable>
+</resources>

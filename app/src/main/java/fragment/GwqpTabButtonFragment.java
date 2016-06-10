@@ -1,9 +1,10 @@
 package fragment;
 
 import android.content.Context;
-import android.net.Uri;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import com.example.fgwoa.fgwmobile.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link GwqpTabButtonFragment.OnFragmentInteractionListener} interface
+ * {@link OnTabSelectedListener} interface
  * to handle interaction events.
  * Use the {@link GwqpTabButtonFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -24,14 +25,17 @@ import com.example.fgwoa.fgwmobile.R;
 public class GwqpTabButtonFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    public static final String ICON_RES_ID = "ICON_RES_ID";
+    public static final String TXT_RES_ID = "TXT_RES_ID";
+    public static final String IS_SELECTED = "IS_SELECTED";
+
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private int mIconResId;
+    private int mTxtResId;
+    private boolean mIsSelected;
 
-    private OnFragmentInteractionListener mListener;
+    private OnTabSelectedListener mListener;
     private FrameLayout mGwqpTabBtn;
     private ImageView mGwqpTabBtnIcon;
     private TextView mGwqpTabBtnTxt;
@@ -51,19 +55,24 @@ public class GwqpTabButtonFragment extends Fragment {
     // TODO: Rename and change types and number of parameters
     public static GwqpTabButtonFragment newInstance(String param1, String param2) {
         GwqpTabButtonFragment fragment = new GwqpTabButtonFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+//        Bundle args = new Bundle();
+//        args.putString(ICON_RES_ID, param1);
+//        args.putString(IS_SELECTED, param2);
+//        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        updateArgument();
+    }
+
+    private void updateArgument() {
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mIconResId = getArguments().getInt(ICON_RES_ID, R.drawable.all);
+            mTxtResId = getArguments().getInt(TXT_RES_ID, R.string.prompt_all);
+            mIsSelected = getArguments().getBoolean(IS_SELECTED, false);
         }
     }
 
@@ -75,8 +84,10 @@ public class GwqpTabButtonFragment extends Fragment {
         mGwqpTabBtn = (FrameLayout)rootView.findViewById(R.id.gwqp_button);
         initGwqpTabButton();
         mGwqpTabBtnIcon = (ImageView)rootView.findViewById(R.id.gwqp_btn_icon);
+        mGwqpTabBtnIcon.setImageResource(mIconResId);
         mGwqpTabBtnTxt = (TextView)rootView.findViewById(R.id.gwqp_btn_txt);
-
+        mGwqpTabBtnTxt.setText(mTxtResId);
+        updateUIBySelectedState();
         return rootView;
     }
 
@@ -84,13 +95,21 @@ public class GwqpTabButtonFragment extends Fragment {
         mGwqpTabBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean newState = !mGwqpTabBtn.isSelected();
-                mGwqpTabBtn.setSelected(newState);
-                mGwqpTabBtnIcon.setSelected(newState);
-                mGwqpTabBtnTxt.setSelected(newState);
-                changeGwqpTabBtnIconColor();
+//                mIsSelected = !mIsSelected;
+//                updateUIBySelectedState();
+                if (mListener != null) {
+                    mListener.onTabSelected(GwqpTabButtonFragment.this);
+                }
             }
         });
+    }
+
+    private void updateUIBySelectedState(){
+        mGwqpTabBtn.setSelected(mIsSelected);
+        mGwqpTabBtnIcon.setSelected(mIsSelected);
+        mGwqpTabBtnTxt.setSelected(mIsSelected);
+        changeGwqpTabBtnIconColor();
+        changeGwqpTabBtnTxtColor();
     }
 
     private void changeGwqpTabBtnIconColor(){
@@ -101,17 +120,22 @@ public class GwqpTabButtonFragment extends Fragment {
         }
     }
 
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    private void changeGwqpTabBtnTxtColor(){
+        if(mGwqpTabBtnTxt.isSelected()){
+            mGwqpTabBtnTxt.setTextColor(getResources().getColor(R.color.colorPrimary));
+        }else{
+            mGwqpTabBtnTxt.setTextColor(getResources().getColor(R.color.colorWhite));
         }
     }
+
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        Fragment parentFragment = getParentFragment();
+        if(parentFragment instanceof OnTabSelectedListener){
+            mListener = (OnTabSelectedListener)parentFragment;
+        }
 //        if (context instanceof OnFragmentInteractionListener) {
 //            mListener = (OnFragmentInteractionListener) context;
 //        } else {
@@ -136,8 +160,27 @@ public class GwqpTabButtonFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface OnTabSelectedListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onTabSelected(Fragment fragment);
+    }
+
+    @Override
+    public void onInflate(Context context, AttributeSet attrs, Bundle savedInstanceState) {
+        super.onInflate(context, attrs, savedInstanceState);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.GwrpTabButtonFragment);
+        mIconResId = a.getResourceId(R.styleable.GwrpTabButtonFragment_gwrp_icon, R.drawable.all);
+        mTxtResId = a.getResourceId(R.styleable.GwrpTabButtonFragment_gwrp_text, R.string.prompt_all);
+        mIsSelected = a.getBoolean(R.styleable.GwrpTabButtonFragment_gwrp_selected, false);
+        a.recycle();
+    }
+
+    public void setOnTabSelectedListener(OnTabSelectedListener listener){
+        mListener = listener;
+    }
+
+    public void setSelected(boolean isSelected){
+        mIsSelected = isSelected;
+        updateUIBySelectedState();
     }
 }

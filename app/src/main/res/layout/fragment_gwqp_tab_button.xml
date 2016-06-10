@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
+    android:gravity="center_vertical"
     tools:context="fragment.GwqpTabButtonFragment">
 
     <FrameLayout
@@ -17,26 +18,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:gravity="center_horizontal">
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:src="@drawable/all"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/gwqp_btn_icon"
+                android:tint="@color/colorWhite"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/prompt_all"
                 android:textSize="16sp"
-                android:textColor="@color/gwqp_foreground"
+                android:textColor="@color/colorWhite"
                 android:id="@+id/gwqp_btn_txt"/>
         </LinearLayout>
     </FrameLayout>
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="18dp"
+        android:layout_height="26dp"
+        android:src="@drawable/gwqp_arrow"
+        android:layout_marginLeft="1dp"
+        android:id="@+id/gwqp_btn_indicator"
+        />
 
 </LinearLayout>

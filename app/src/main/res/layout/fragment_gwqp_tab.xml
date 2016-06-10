@@ -2,14 +2,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context="fragment.GwqpTabFragment">
     <fragment
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:name="fragment.GwqpTabButtonFragment"
         tools:layout="@layout/fragment_gwqp_tab_button"
-        android:tag="all"
+        android:id="@+id/quanbu"
+        android:layout_marginBottom="40dp"
+        app:gwrp_selected="true"
+        />
+
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="fragment.GwqpTabButtonFragment"
+        tools:layout="@layout/fragment_gwqp_tab_button"
+        android:id="@+id/shouwen"
+        android:layout_marginBottom="40dp"
+        app:gwrp_icon="@drawable/send"
+        app:gwrp_text="@string/prompt_send"
+
+        />
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="fragment.GwqpTabButtonFragment"
+        tools:layout="@layout/fragment_gwqp_tab_button"
+        android:id="@+id/fawen"
+        android:layout_marginBottom="40dp"
+        app:gwrp_icon="@drawable/receive"
+        app:gwrp_text="@string/prompt_receive"
+        />
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="fragment.GwqpTabButtonFragment"
+        tools:layout="@layout/fragment_gwqp_tab_button"
+        android:id="@+id/qianbao"
+        app:gwrp_icon="@drawable/sign"
+        app:gwrp_text="@string/prompt_sign"
         />
 
 </LinearLayout>
