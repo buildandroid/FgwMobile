@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
             if((System.currentTimeMillis()-exitTime) > 2000){
-                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.exit_app), Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
                 finish();
@@ -54,11 +54,14 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         user_login_button = (Button) findViewById(R.id.user_login_button);
 
+        initUserId();
+        initPassword();
         user_login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String uid = userid.getText().toString().trim();
                 String pswd = password.getText().toString().trim();
+
                 // TODO 做uid pswd 合法输入校验
                 Params params = new Params();
                 String str = uid + "|" + MD5EncodeUtils.MD5Encode(pswd.getBytes());
@@ -85,6 +88,28 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                 });
+            }
+        });
+    }
+
+    private void initUserId(){
+        userid.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                    userid.setHint("");
+                else
+                    userid.setHint(getString(R.string.prompt_userid));
+            }
+        });
+    }
+
+    private void initPassword(){
+        password.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+            public void onFocusChange(View v, boolean hasFocus){
+                if(hasFocus)
+                    password.setHint("");
+                else
+                    password.setHint(getString(R.string.prompt_password));
             }
         });
     }
