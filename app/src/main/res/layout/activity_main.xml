@@ -5,5 +5,84 @@
     tools:context="activity.MainActivity"
     android:background="@drawable/main_bg"
     >
+    <Button
+        android:layout_width="126dp"
+        android:layout_height="126dp"
+        android:background="@drawable/juece_fenxi_icon"
+        android:id="@+id/button1"
+        android:text=""
+        android:visibility="visible"
+        />
 
+    <Button
+        android:layout_width="126dp"
+        android:layout_height="126dp"
+        android:background="@drawable/jishiben_icon"
+        android:id="@+id/button2"
+        android:text=""
+        android:visibility="visible"
+        />
+
+    <Button
+        android:layout_width="126dp"
+        android:layout_height="126dp"
+        android:background="@drawable/gongwen_qianpi_icon"
+        android:id="@+id/button3"
+        android:text=""
+        android:visibility="visible"
+        />
+
+    <Button
+        android:layout_width="126dp"
+        android:layout_height="126dp"
+        android:background="@drawable/shipin_huiyi_icon"
+        android:id="@+id/button4"
+        android:text=""
+        android:visibility="visible"
+        />
+
+    <Button
+        android:layout_width="126dp"
+        android:layout_height="126dp"
+        android:background="@drawable/gonggong_xinxi_icon"
+        android:id="@+id/button5"
+        android:text=""
+        android:visibility="visible"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:src="@drawable/juece_fenxi"
+        android:adjustViewBounds="true"
+        android:id="@+id/image1"
+        android:visibility="invisible"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:src="@drawable/jishiben"
+        android:adjustViewBounds="true"
+        android:id="@+id/image2"
+        android:visibility="invisible"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:src="@drawable/gongwen_qianpi"
+        android:adjustViewBounds="true"
+        android:id="@+id/image3"
+        android:visibility="invisible"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:src="@drawable/shipin_huiyi"
+        android:adjustViewBounds="true"
+        android:id="@+id/image4"
+        android:visibility="invisible"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:src="@drawable/gonggong_xinxi"
+        android:adjustViewBounds="true"
+        android:id="@+id/image5"
+        android:visibility="invisible"/>
 </FrameLayout>
