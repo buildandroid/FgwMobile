@@ -18,6 +18,7 @@ import com.example.fgwoa.fgwmobile.RestApi;
 import com.example.fgwoa.fgwmobile.RetrofitFactory;
 
 import Utils.MD5EncodeUtils;
+import Utils.SharedObject;
 import config.Params;
 import config.Result;
 import retrofit2.Call;
@@ -55,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String token = sharedPreferences.getString("token", "");
 
         userid = (EditText) findViewById(R.id.userid);
         password = (EditText) findViewById(R.id.password);
@@ -85,9 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                             //  TODO 请求成功
                             Result result = response.body();
                             String token = result.ret;
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("token", token);
-                            editor.commit();
+                            SharedObject.saveToken(sharedPreferences, token);
                             Intent intent = new Intent();
                             intent.setClass(LoginActivity.this, MainActivity.class);
                             intent.putExtra("ret", token);
