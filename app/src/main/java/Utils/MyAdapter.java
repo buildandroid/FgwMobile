@@ -8,7 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.wangxiao.R;
+
+import com.example.fgwoa.fgwmobile.R;
 
 import java.util.List;
 import java.util.Map;
