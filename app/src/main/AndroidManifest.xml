@@ -2,19 +2,23 @@
     package="com.example.fgwoa.fgwmobile">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application android:allowBackup="true" android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher" android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
         <activity android:name="activity.SplashActivity">
+
+        </activity>
+
+        <activity android:name="activity.MainActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="activity.MainActivity"></activity>
 
         <activity android:name="activity.GwqpActivity">
         </activity>
@@ -30,6 +34,17 @@
         <activity android:name="activity.GwppActivity"
             android:label="@string/gongwenpibandan"
             android:screenOrientation="landscape">
+        </activity>
+
+        <activity android:name="activity.SignActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:screenOrientation="landscape">
+
+        </activity>
+
+        <activity android:name="activity.PdfViewActivity"
+            android:screenOrientation="portrait">
+
         </activity>
 
     </application>
