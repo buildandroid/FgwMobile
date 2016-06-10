@@ -49,6 +49,7 @@
                 android:background="@drawable/padding"/>
             <EditText
                 android:id="@+id/userid"
+                android:text="fgwtest3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="用户名"
@@ -79,6 +80,7 @@
                 android:background="@drawable/padding"/>
             <EditText
                 android:id="@+id/password"
+                android:text="qwe"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="密码"

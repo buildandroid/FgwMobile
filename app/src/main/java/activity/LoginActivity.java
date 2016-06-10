@@ -1,7 +1,9 @@
 package activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.KeyEvent;
@@ -29,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText userid = null;
     private EditText password = null;
     private Button user_login_button = null;
+    private SharedPreferences sharedPreferences;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -50,6 +53,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String token = sharedPreferences.getString("token", "");
+
         userid = (EditText) findViewById(R.id.userid);
         password = (EditText) findViewById(R.id.password);
         user_login_button = (Button) findViewById(R.id.user_login_button);
@@ -64,19 +70,25 @@ public class LoginActivity extends AppCompatActivity {
                 String str = uid + "|" + MD5EncodeUtils.MD5Encode(pswd.getBytes());
                 String authToken = Base64.encodeToString(str.getBytes(), Base64.NO_WRAP);
 
-                Call<Result> call = RetrofitFactory.getRetorfit().create(RestApi.class).sysLogin("http://210.74.194.125:8082/gw-web-manager/gws/sysLogin", authToken);
+                String serverUrl = getString(R.string.SERVER_URL);
+
+                Call<Result> call = RetrofitFactory.getRetorfit().create(RestApi.class).sysLogin(serverUrl + "sysLogin", authToken);
                 call.enqueue(new Callback<Result>() {
 
                     @Override
                     public void onResponse(Call<Result> call, Response<Result> response) {
                         if (response.isSuccessful()) {
                             //  TODO 请求成功
+                            Result result = response.body();
+                            String token = result.ret;
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("token", token);
+                            editor.commit();
                             Intent intent = new Intent();
                             intent.setClass(LoginActivity.this, MainActivity.class);
-                            intent.putExtra("ret", response.body().ret);
-                            Toast.makeText(LoginActivity.this, response.body().ret, Toast.LENGTH_LONG).show();
+                            intent.putExtra("ret", token);
+                            Toast.makeText(LoginActivity.this, token, Toast.LENGTH_LONG).show();
                             startActivity(intent);
-
                         }
                     }
 
