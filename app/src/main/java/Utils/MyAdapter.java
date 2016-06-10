@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.example.fgwoa.fgwmobile.R;
 
 import java.util.List;

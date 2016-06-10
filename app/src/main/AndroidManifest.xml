@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fgwoa.fgwmobile">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application android:allowBackup="true" android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher" android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -13,6 +15,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="activity.MainActivity"></activity>
+
         <activity android:name="activity.GwqpActivity">
         </activity>
 
@@ -24,6 +28,11 @@
         <activity android:name="gwQuery.GwQueryActivity">
         </activity>
         <activity android:name="gwQuery.QueryListActivity">
+        </activity>
+
+        <activity android:name="activity.GwppActivity"
+            android:label="@string/gongwenpibandan"
+            android:screenOrientation="landscape">
         </activity>
 
     </application>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_pishiqingkuang"
+        android:title="@string/pishiqingkuang"
+        android:icon="@drawable/ic_edit_black_48dp"
+        app:showAsAction="withText|always"></item>
+
+    <item
+        android:id="@+id/menu_fujian"
+        android:title="@string/fujian"
+        android:icon="@drawable/pdficon"
+        app:showAsAction="withText|always"></item>
+</menu>
