@@ -30,12 +30,12 @@ public class GwqpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gwqianpi_main);
-        listView = (ListView) findViewById(R.id.gw_list);
-        List<Map<String, Object>> list = getData();
-        listView.setAdapter(new MyAdapter(this, list));
-
-        initTitle();
+        setContentView(R.layout.activity_gwqp);
+//        listView = (ListView) findViewById(R.id.gw_list);
+//        List<Map<String, Object>> list = getData();
+//        listView.setAdapter(new MyAdapter(this, list));
+//
+//        initTitle();
 
     }
 
