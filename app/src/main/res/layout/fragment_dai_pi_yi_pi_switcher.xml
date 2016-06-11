@@ -9,6 +9,7 @@
         android:text="@string/prompt_pend"
         android:id="@+id/gwqp_daipi"
         android:textSize="20sp"
+        android:textColor="@color/gwqp_switcher"
         android:background="@drawable/gwqp_daipi_btn_bg"
         />
     <Button
@@ -16,6 +17,7 @@
         android:layout_height="wrap_content"
         android:text="@string/prompt_approve"
         android:textSize="20sp"
+        android:textColor="@color/gwqp_switcher"
         android:layout_toRightOf="@id/gwqp_daipi"
         android:background="@drawable/gwqp_yipi_btn_bg"
         android:id="@+id/gwqp_yipi"
