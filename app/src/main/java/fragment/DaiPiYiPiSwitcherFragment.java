@@ -39,6 +39,7 @@ public class DaiPiYiPiSwitcherFragment extends Fragment {
         mYipiButton = (Button)rootView.findViewById(R.id.gwqp_yipi);
         initDaipiButton();
         initYipiButton();
+        updateUI();
         return rootView;
     }
 

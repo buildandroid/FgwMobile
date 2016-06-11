@@ -11,24 +11,29 @@
         android:layout_height="match_parent"
         android:layout_marginTop="12dp"
         android:layout_marginLeft="126dp"
+        android:layout_marginRight="12dp"
         android:background="@drawable/gwqp_list_bg"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="72dp"
             android:orientation="horizontal"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical">
             <fragment
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:name="fragment.DaiPiYiPiSwitcherFragment"
                 tools:layout="@layout/fragment_dai_pi_yi_pi_switcher"
                 android:layout_marginLeft="58dp"
-                android:layout_marginTop="16dp"
                 android:tag="daipiyipi"
                 />
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGray" />
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
