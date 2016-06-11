@@ -63,9 +63,14 @@
 
         <activity
             android:name="activity.PdfViewActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             >
 
         </activity>
+
+        <activity android:name="activity.GGXXPdfViewActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            />
 
     </application>
 

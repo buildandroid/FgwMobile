@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity{
     private static final float ICON_TITLE_SPACE = 50f;
     private Button mGwqpButton;
     private Button mNotebookButton;
+    private Button mGgxxButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,14 @@ public class MainActivity extends AppCompatActivity{
                 intent.setComponent(new ComponentName("com.ebensz.enote.entry", "com.ebensz.enote.entry.activity.EntryActivity"));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+            }
+        });
+
+        mGgxxButton = (Button)findViewById(R.id.button5);
+        mGgxxButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), GGXXPdfViewActivity.class));
             }
         });
 
