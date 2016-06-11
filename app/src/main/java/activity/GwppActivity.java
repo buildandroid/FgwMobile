@@ -156,6 +156,11 @@ public class GwppActivity extends AppCompatActivity {
             public void onResponse(Call<Result> call, Response<Result> response) {
                 if (response.isSuccessful()) {
                     mResult = response.body();
+                    try {
+                        updateText(mResult.gwForm);
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
