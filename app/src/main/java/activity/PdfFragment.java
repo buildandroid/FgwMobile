@@ -172,6 +172,10 @@ public class PdfFragment extends Fragment {
         dialog.setCancelable(true);
         dialog.show();
     }
+
+    public void gotoPage(int index){
+        mDocView.setDisplayedViewIndex(index);
+    }
 }
 
 
