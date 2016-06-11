@@ -86,11 +86,13 @@ public class LoginActivity extends AppCompatActivity {
                             Result result = response.body();
                             String token = result.ret;
                             SharedObject.saveToken(sharedPreferences, token);
+                            SharedObject.saveUsername(sharedPreferences, result.username);
                             Intent intent = new Intent();
                             intent.setClass(LoginActivity.this, MainActivity.class);
                             intent.putExtra("ret", token);
 //                            Toast.makeText(LoginActivity.this, token, Toast.LENGTH_LONG).show();
                             startActivity(intent);
+                            finish();
                         }
                     }
 

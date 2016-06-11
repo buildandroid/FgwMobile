@@ -5,14 +5,20 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -22,6 +28,7 @@ import com.example.fgwoa.fgwmobile.R;
 import com.example.fgwoa.fgwmobile.RestApi;
 import com.example.fgwoa.fgwmobile.RetrofitFactory;
 
+import Utils.SharedObject;
 import config.Result;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +40,8 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity{
     private static final float ICON_TITLE_SPACE = 50f;
     private Button mGwqpButton;
+    private Button mNotebookButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +55,18 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, GwqpActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mNotebookButton = (Button)findViewById(R.id.button2);
+        mNotebookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("android.intent.action.MAIN");
+                intent.addCategory("android.intent.category.LAUNCHER");
+                intent.setComponent(new ComponentName("com.ebensz.enote.entry", "com.ebensz.enote.entry.activity.EntryActivity"));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
@@ -142,5 +163,21 @@ public class MainActivity extends AppCompatActivity{
             view.setX(x);
             view.setY(y);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+
+        for(int i = 0; i<menu.size(); i++){
+            MenuItem menuItem = menu.getItem(i);
+            if(menuItem.getItemId() == R.id.menu_user){
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+                menuItem.setTitle(SharedObject.getUsername(sharedPreferences));
+                break;
+            }
+        }
+        return super.onCreateOptionsMenu(menu);
     }
 }

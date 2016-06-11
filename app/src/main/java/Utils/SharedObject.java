@@ -10,6 +10,7 @@ import android.util.Base64;
  */
 public final class SharedObject {
     public static final String TOKEN = "token";
+    public static final String USERNAME="username";
 
     public static void saveToken(Context context, String tokenValue){
         saveToken(PreferenceManager.getDefaultSharedPreferences(context), tokenValue);
@@ -42,5 +43,19 @@ public final class SharedObject {
         String decoded = new String(Base64.decode(token, Base64.NO_WRAP));
         String[] split = decoded.split("\\|");
         return split[0];
+    }
+
+    public static void saveUsername(SharedPreferences sharedPreferences, String value){
+        final SharedPreferences.Editor edit = sharedPreferences.edit();
+        saveUsername(edit, value);
+        edit.commit();
+    }
+
+    public static void saveUsername(SharedPreferences.Editor editor, String value){
+        editor.putString(USERNAME, value).apply();
+    }
+
+    public static String getUsername(SharedPreferences sharedPreferences){
+        return sharedPreferences.getString(USERNAME, null);
     }
 }

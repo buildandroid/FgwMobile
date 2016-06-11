@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="220dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:textSize="16sp"
@@ -48,7 +48,7 @@
                 android:text="待批：张XX"
                 android:id="@+id/daipi"/>
             <TextView
-                android:layout_width="300dp"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:textSize="16sp"

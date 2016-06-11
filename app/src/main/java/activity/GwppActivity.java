@@ -307,7 +307,7 @@ public class GwppActivity extends AppCompatActivity implements SignFragment.OnSi
                                 dialog.dismiss();
                             }
                         });
-                        lingdao.setText(item.people);
+//                        lingdao.setText(item.people);
                         dialog.show();
                     }
                 });
