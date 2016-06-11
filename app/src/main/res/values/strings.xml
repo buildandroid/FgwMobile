@@ -20,10 +20,10 @@
     <string name="prompt_keyword">检索关键字</string>
     <string name="prompt_search">搜索或者输入内容</string>
     <string name="prompt_searchButton">搜索</string>
-    <string name="list_text_1">来文单位:</string>
-    <string name="list_text_2">待批:</string>
-    <string name="list_text_3">来文日期:</string>
-    <string name="list_text_4">类型:</string>
+    <string name="list_text_1">来文单位：%1$s</string>
+    <string name="list_text_2">待批：%1$s</string>
+    <string name="list_text_3">来文日期：%1$s</string>
+    <string name="list_text_4">类型：%1$s</string>
     <string name="prompt_check">公文查看</string>
     <string name="prompt_list">公文列表</string>
     <string name="prompt_form">表单查看</string>
