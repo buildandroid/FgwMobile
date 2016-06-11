@@ -14,12 +14,13 @@ import com.example.fgwoa.fgwmobile.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link DaiPiYiPiSwitcherFragment.OnFragmentInteractionListener} interface
+ * {@link OnSwitchChangeListener} interface
  * to handle interaction events.
  */
 public class DaiPiYiPiSwitcherFragment extends Fragment {
+    public static final String SWITCH = "SWITCH";
 
-    private OnFragmentInteractionListener mListener;
+    private OnSwitchChangeListener mListener;
     private int mSwitch = 0;
     private Button mDaipiButton;
     private Button mYipiButton;
@@ -49,6 +50,7 @@ public class DaiPiYiPiSwitcherFragment extends Fragment {
             public void onClick(View v) {
                 mSwitch = 0;
                 updateUI();
+                changeSwitch();
             }
         });
     }
@@ -59,9 +61,17 @@ public class DaiPiYiPiSwitcherFragment extends Fragment {
             public void onClick(View v) {
                 mSwitch = 1;
                 updateUI();
+                changeSwitch();
             }
         });
     }
+
+    private void changeSwitch(){
+        if(mListener != null){
+            mListener.onSwitch(mSwitch);
+        }
+    }
+
 
     private void updateUI(){
         if(mSwitch == 0){
@@ -77,22 +87,20 @@ public class DaiPiYiPiSwitcherFragment extends Fragment {
         }
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            mSwitch = bundle.getInt(SWITCH);
+        }
+        if (context instanceof OnSwitchChangeListener) {
+            mListener = (OnSwitchChangeListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
     }
 
     @Override
@@ -111,8 +119,8 @@ public class DaiPiYiPiSwitcherFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface OnSwitchChangeListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onSwitch(int index);
     }
 }

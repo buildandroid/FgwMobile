@@ -107,6 +107,7 @@ public class GwqpTabButtonFragment extends Fragment {
     }
 
     private void updateUIBySelectedState(){
+        mGwqpTabBtn.setClickable(!mIsSelected);
         mGwqpTabBtn.setSelected(mIsSelected);
         mGwqpTabBtnIcon.setSelected(mIsSelected);
         mGwqpTabBtnTxt.setSelected(mIsSelected);

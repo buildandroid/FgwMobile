@@ -1,9 +1,12 @@
 package activity;
 
+import android.app.Fragment;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,19 +16,41 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.fgwoa.fgwmobile.R;
+import com.example.fgwoa.fgwmobile.RestApi;
+import com.example.fgwoa.fgwmobile.RetrofitFactory;
 
 import org.w3c.dom.Text;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Utils.SharedObject;
+import bean.Gw;
+import config.Result;
+import fragment.DaiPiYiPiSwitcherFragment;
+import fragment.GwqpTabFragment;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * Created by wangxiao on 16/6/7.
  */
-public class GwqpActivity extends AppCompatActivity {
+public class GwqpActivity extends AppCompatActivity implements GwqpTabFragment.OnTabSelectedListener,
+        DaiPiYiPiSwitcherFragment.OnSwitchChangeListener{
     private ListView mGwqpListView;
+    private String mCategory;
+    private static final String[] CATEGORY = {"all", "fw", "sw", "qb"};
+    private String mStatus;
+    private static final String[] STATUS = {"1", "2"};
+    private int mCurrentPageNumber;
+    private int mMaxPageNumber;
+    private static final int PAGE_SIZE = 10;
+    private List<Gw> mGwList;
+
 
 
 //    Intent intent = getIntent();
@@ -35,12 +60,20 @@ public class GwqpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initParameter();
         setContentView(R.layout.activity_gwqp);
         mGwqpListView = (ListView) findViewById(R.id.gwqp_list);
         initGwqpListView();
+        remoteFetchGongWenAsync();
 //
 //        initTitle();
 
+    }
+
+    private void initParameter(){
+        mCategory = CATEGORY[0];
+        mStatus = STATUS[0];
+        mCurrentPageNumber = 1;
     }
 
     private void initGwqpListView(){
@@ -50,17 +83,17 @@ public class GwqpActivity extends AppCompatActivity {
     private class GwListAdapter extends BaseAdapter{
         @Override
         public int getCount() {
-            return 20;
+            return mGwList != null ? mGwList.size() : 0;
         }
 
         @Override
         public Object getItem(int position) {
-            return "";
+            return mGwList.get(position);
         }
 
         @Override
         public long getItemId(int position) {
-            return 1;
+            return position;
         }
 
         @Override
@@ -80,12 +113,13 @@ public class GwqpActivity extends AppCompatActivity {
                 view = convertView;
                 holder = (ViewHolder)view.getTag();
             }
-            holder.gongWenBiaoti.setText("公文标题");
+            Gw gw = (Gw)getItem(position);
+            holder.gongWenBiaoti.setText(gw.getTITLE());
             Resources res = getResources();
-            holder.laiWenDanwei.setText(String.format(res.getString(R.string.list_text_1), "北京 发 改"));
-            holder.daiPi.setText(String.format(res.getString(R.string.list_text_2), "张某某"));
-            holder.laiWenRiqi.setText(String.format(res.getString(R.string.list_text_3), "2016年12月22日"));
-            holder.leiXing.setText(String.format(res.getString(R.string.list_text_4), "发文"));
+            holder.laiWenDanwei.setText(String.format(res.getString(R.string.list_text_1), gw.getUNIT1()));
+            holder.daiPi.setText(String.format(res.getString(R.string.list_text_2), gw.getSQLEADER()));
+            holder.laiWenRiqi.setText(String.format(res.getString(R.string.list_text_3), gw.getDATE1()));
+            holder.leiXing.setText(String.format(res.getString(R.string.list_text_4), gw.getTYPE()));
 
             return view;
         }
@@ -116,21 +150,54 @@ public class GwqpActivity extends AppCompatActivity {
         }
     }
 
-    public List<Map<String, Object>> getData(){
-        List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
-        for (int i = 0; i < 3; i++){
-            Map<String, Object> map=new HashMap<String, Object>();
-            map.put("image", R.drawable.logo);
-            map.put("TITLE", "市人力社保局、市发展改革委关于印发北京市“十三五”时期 人力资源和社会保障发展规划的通知" + i);
-            map.put("content1", "市发改委");
-            map.put("content2", "张某某");
-            map.put("content3", "2016年4月22日");
-            map.put("content4", "收文");
-            list.add(map);
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        if(fragment.getTag().equals("tag")){
+            Bundle bundle = new Bundle();
+            bundle.putInt(GwqpTabFragment.CATEGORY, 0);
+            fragment.setArguments(bundle);
+        }else if(fragment.getTag().equals("daipiyipi")){
+            Bundle bundle = new Bundle();
+            bundle.putInt(DaiPiYiPiSwitcherFragment.SWITCH, 0);
+            fragment.setArguments(bundle);
         }
-        return list;
     }
 
+    @Override
+    public void onTabSelected(int index) {
+        Log.d("select tab", "index" + index);
+    }
 
+    @Override
+    public void onSwitch(int index) {
+        Log.d("switch", "index " + index);
+    }
 
+    private void remoteFetchGongWenAsync() {
+        String token = SharedObject.getToken(this);
+        String category = mCategory;
+        String status = mStatus;
+        String pageNum = String.valueOf(mCurrentPageNumber);
+        String pageSize = String.valueOf(PAGE_SIZE);
+        String kwd = "";
+        Call<Result> call = RetrofitFactory.getRetorfit().create(RestApi.class).gwQuery(getString(R.string.SERVER_URL) + "gwQuery", token, category, status, pageNum, pageSize, kwd);
+        call.enqueue(new Callback<Result>() {
+
+            @Override
+            public void onResponse(Call<Result> call, Response<Result> response) {
+                if (response.isSuccessful()) {
+                    mGwList = response.body().gwList;
+                    Log.d("gwList", "size: " + mGwList.size());
+                    ((BaseAdapter)mGwqpListView.getAdapter()).notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Result> call, Throwable t) {
+                t.printStackTrace();
+
+            }
+        });
+    }
 }
