@@ -2,12 +2,18 @@
     package="com.example.fgwoa.fgwmobile">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <application android:allowBackup="true" android:label="@string/app_name"
-        android:icon="@mipmap/ic_launcher" android:supportsRtl="true"
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="activity.SplashActivity" android:screenOrientation="landscape"
+        <activity
+            android:name="activity.SplashActivity"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar.FullScreen">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN"/>-->
@@ -28,7 +34,7 @@
         <activity android:name="activity.GwqpActivity"
             android:screenOrientation="landscape">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -38,14 +44,24 @@
             android:screenOrientation="landscape">
         </activity>
 
-        <activity android:name="gwQuery.GwQueryActivity">
-        </activity>
-        <activity android:name="gwQuery.QueryListActivity">
+        <activity android:name="gwQuery.GwQueryActivity"></activity>
+        <activity android:name="gwQuery.QueryListActivity"></activity>
+
+        <activity
+            android:name="activity.GwppActivity"
+            android:label="@string/gongwenpibandan"
+            android:screenOrientation="landscape"></activity>
+
+        <activity
+            android:name="activity.SignActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
 
-        <activity android:name="activity.GwppActivity"
-            android:label="@string/gongwenpibandan"
-            android:screenOrientation="landscape">
+        <activity
+            android:name="activity.PdfViewActivity"
+            android:screenOrientation="portrait">
+
         </activity>
 
     </application>

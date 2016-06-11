@@ -6,6 +6,7 @@ import java.util.List;
 
 import bean.Gw;
 import bean.GwAttachs;
+import bean.GwForm;
 import bean.GwSignInfo;
 import retrofit2.http.Url;
 
@@ -17,7 +18,7 @@ public class Result {
     public String username;
     public String roleIds;
     public List<Gw> gwList;
-//    public List<GwForm> gwForm;
+    public GwForm gwForm;
     public List<GwSignInfo> gwSignInfo;
     public List<GwAttachs> gwAttachs;
     public Url url;

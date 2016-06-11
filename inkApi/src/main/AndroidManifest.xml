@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0.0.0001275" package="com.ebensz.eink">
+
+    <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="18"/>
+
+</manifest>

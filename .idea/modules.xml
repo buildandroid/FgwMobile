@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/FgwMobile.iml" filepath="$PROJECT_DIR$/FgwMobile.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fgwmobile.iml" filepath="$PROJECT_DIR$/fgwmobile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/inkApi/inkApi.iml" filepath="$PROJECT_DIR$/inkApi/inkApi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mupdflibrary/mupdflibrary.iml" filepath="$PROJECT_DIR$/mupdflibrary/mupdflibrary.iml" />
     </modules>
   </component>
 </project>
