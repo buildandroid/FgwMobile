@@ -1,6 +1,7 @@
 package activity;
 
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -32,6 +33,7 @@ import com.example.fgwoa.fgwmobile.RestApi;
 import com.example.fgwoa.fgwmobile.RetrofitFactory;
 
 import java.lang.reflect.Field;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,6 +46,7 @@ import bean.GwAttachs;
 import bean.GwForm;
 import bean.GwSignInfo;
 import config.Result;
+import fragment.SignFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,7 +54,7 @@ import retrofit2.Response;
 /**
  * Created by jikai on 6/10/16.
  */
-public class GwppActivity extends AppCompatActivity {
+public class GwppActivity extends AppCompatActivity implements SignFragment.OnSignListener{
     private ViewGroup container;
     private ViewGroup listContainer;
     private SharedPreferences sharedPreferences;
@@ -124,9 +127,12 @@ public class GwppActivity extends AppCompatActivity {
         findViewById(R.id.btn_pishi).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SignActivity.class);
-                intent.putExtra("barcode", barcode);
-                GwppActivity.this.startActivityForResult(intent, REQUEST_SIGN);
+//                Intent intent = new Intent(v.getContext(), SignActivity.class);
+//                intent.putExtra("barcode", barcode);
+//                GwppActivity.this.startActivityForResult(intent, REQUEST_SIGN);
+                SignFragment fragment = SignFragment.newInstance(barcode);
+                fragment.show(getFragmentManager(), "sign");
+//                new SignFragment().show(getFragmentManager(), "sign");
             }
         });
         findViewById(R.id.close).setOnClickListener(new View.OnClickListener() {
@@ -455,5 +461,11 @@ public class GwppActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    @Override
+    public void onSign(String fileId) {
+        String url = getString(R.string.SERVER_URL);
+        String token = sharedPreferences.getString("token", "");
+        String signUrl =  url + "gwSignDown?token=" + token + "&fileId=" + fileId;
+        Glide.with(this).load(Uri.parse(signUrl)).into((ImageView)findViewById(R.id.signature));
+    }
 }

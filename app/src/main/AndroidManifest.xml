@@ -41,7 +41,8 @@
 
         <activity android:name="activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
 
         <activity android:name="gwQuery.GwQueryActivity"></activity>
@@ -50,7 +51,9 @@
         <activity
             android:name="activity.GwppActivity"
             android:label="@string/gongwenpibandan"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            ></activity>
 
         <activity
             android:name="activity.SignActivity"

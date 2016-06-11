@@ -22,6 +22,7 @@ public class Result {
     public List<GwSignInfo> gwSignInfo;
     public List<GwAttachs> gwAttachs;
     public Url url;
+    public String fileId;
 
 //
 }
