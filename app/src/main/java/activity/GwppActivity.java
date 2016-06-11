@@ -289,6 +289,14 @@ public class GwppActivity extends AppCompatActivity {
         });
         if (category.equals("sw")) {
             listTitle.setText(result.gwForm.WENJIANBIAOTI);
+        }else if(category.equals("fw") || category.equals("lhfw")) {
+            Resources res = getResources();
+            String fwwh = String.format(res.getString(R.string.fw_wenhao), result.gwForm.getNUMBERCOUNT());
+            listTitle.setText(fwwh);
+        }else if(category.equals("qb")){
+            Resources res = getResources();
+            String fwwh = String.format(res.getString(R.string.fw_wenhao), result.gwForm.BANWENHAO);
+            listTitle.setText(fwwh);
         } else {
             listTitle.setText(result.gwForm.DOCTITLE);
         }
