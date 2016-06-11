@@ -88,6 +88,22 @@ public class GwppActivity extends AppCompatActivity implements SignFragment.OnSi
         init(category);
         fetchData(barcode);
 
+        final View zhengwenButton = findViewById(R.id.zhengwen_button);
+        if(zhengwenButton != null){
+            zhengwenButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String token = SharedObject.getToken(v.getContext());
+                    String fileId = mResult.gwForm.WORKFLOWINSTANCE_GUID;
+                    String url = getString(R.string.SERVER_URL);
+                    String zhengwenUrl = url + "gwTextDown?token=" + token + "&fileId=" + fileId;
+                    Log.d("zhengwen url", zhengwenUrl);
+                    Intent intent = new Intent(GwppActivity.this, PdfViewActivity.class);
+                    intent.putExtra("url", zhengwenUrl);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     private void init(String category) {

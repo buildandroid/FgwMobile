@@ -46,4 +46,8 @@ public interface RestApi {
     @POST
     Call<Result> gwSign(@Url String url, @Part("token") RequestBody token, @Part("barcode") RequestBody barcode,
                         @Part MultipartBody.Part file);
+
+    @FormUrlEncoded
+    @POST
+    Call<Result> getTextDownload(@Url String url, @Field("token") String params, @Field("fileId") String fileId);
 }

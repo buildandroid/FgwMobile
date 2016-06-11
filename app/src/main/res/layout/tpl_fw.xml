@@ -7,8 +7,7 @@
     >
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
+        android:layout_height="wrap_content" >
 
         <TableLayout
             android:id="@+id/tb1"
@@ -661,6 +660,13 @@
                 android:background="@drawable/textstroke"/>
 
         </TableLayout>
-
+        <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="正文"
+            android:layout_alignBottom="@id/tb5"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="40dp"
+            android:id="@+id/zhengwen_button"/>
     </RelativeLayout>
 </ScrollView>
