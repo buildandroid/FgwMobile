@@ -39,8 +39,10 @@ import java.util.Date;
 import java.util.List;
 
 import Utils.MapUtils;
+import Utils.SharedObject;
 import bean.GwAttachs;
 import bean.GwForm;
+import bean.GwSignInfo;
 import config.Result;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,6 +63,7 @@ public class GwppActivity extends AppCompatActivity {
     private LayoutInflater layoutInflater;
     private final static int REQUEST_SIGN = 1000;
     private Result mResult;
+    private String mUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,8 @@ public class GwppActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_gwpp);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mUserId = SharedObject.getUserId(sharedPreferences);
+        Log.d("userId", mUserId);
 
         Intent intent = getIntent();
         barcode = intent.getStringExtra("barcode");
@@ -142,7 +147,7 @@ public class GwppActivity extends AppCompatActivity {
     }
 
     private void fetchData(String barcode) {
-        String token = sharedPreferences.getString("token", "");
+        final String token = sharedPreferences.getString("token", "");
         if (TextUtils.isEmpty(token)) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -159,6 +164,12 @@ public class GwppActivity extends AppCompatActivity {
                     mResult = response.body();
                     listContainer.setVisibility(View.VISIBLE);
                     fillPinshiList(mResult);
+                    GwSignInfo signInfo = isCurrentLeader();
+                    if(signInfo != null){
+                        String url = getString(R.string.SERVER_URL);
+                        String signature = url + "gwSignDown?token=" + token + "&fileId=" + signInfo.getURL();
+                        Glide.with(GwppActivity.this).load(Uri.parse(signature)).into((ImageView)findViewById(R.id.signature));
+                    }
                     try {
                         updateText(mResult.gwForm);
                     } catch (IllegalAccessException e) {
@@ -172,6 +183,16 @@ public class GwppActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private GwSignInfo isCurrentLeader(){
+        List<GwSignInfo> signInfos = mResult.gwSignInfo;
+        for(GwSignInfo signInfo:signInfos){
+            if(signInfo.getSQLEADER().equals(mUserId)){
+                return signInfo;
+            }
+        }
+        return  null;
     }
 
     private class SignInfoItem {
