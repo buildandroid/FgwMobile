@@ -60,7 +60,7 @@
 
         <activity
             android:name="activity.PdfViewActivity"
-            android:screenOrientation="portrait">
+            >
 
         </activity>
 

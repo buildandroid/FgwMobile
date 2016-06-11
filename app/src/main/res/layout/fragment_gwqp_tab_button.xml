@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/prompt_all"
                 android:textSize="16sp"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/gwqp_tab_btn"
                 android:id="@+id/gwqp_btn_txt"/>
         </LinearLayout>
     </FrameLayout>

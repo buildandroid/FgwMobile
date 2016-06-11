@@ -112,7 +112,7 @@ public class GwqpTabButtonFragment extends Fragment {
         mGwqpTabBtnTxt.setSelected(mIsSelected);
         mGwqpBtnIndicator.setSelected(mIsSelected);
         changeGwqpTabBtnIconColor();
-        changeGwqpTabBtnTxtColor();
+//        changeGwqpTabBtnTxtColor();
         changeGwqpTabBtnIndicatorVisiblity();
     }
 
