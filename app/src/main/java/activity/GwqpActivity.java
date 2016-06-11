@@ -6,11 +6,14 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.ArrayMap;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -51,6 +54,14 @@ public class GwqpActivity extends AppCompatActivity implements GwqpTabFragment.O
     private static final int PAGE_SIZE = 10;
     private List<Gw> mGwList;
 
+    private static final ArrayMap<String, String> GW_TYPE = new ArrayMap<>();
+    static{
+        GW_TYPE.put("fw", "发文");
+        GW_TYPE.put("lhfw", "联合发文");
+        GW_TYPE.put("sw", "收文");
+        GW_TYPE.put("qb", "签报");
+    }
+
 
 
 //    Intent intent = getIntent();
@@ -64,7 +75,7 @@ public class GwqpActivity extends AppCompatActivity implements GwqpTabFragment.O
         setContentView(R.layout.activity_gwqp);
         mGwqpListView = (ListView) findViewById(R.id.gwqp_list);
         initGwqpListView();
-        remoteFetchGongWenAsync();
+        remoteFetchGongWenAsync(false);
 //
 //        initTitle();
 
@@ -78,6 +89,22 @@ public class GwqpActivity extends AppCompatActivity implements GwqpTabFragment.O
 
     private void initGwqpListView(){
         mGwqpListView.setAdapter(new GwListAdapter());
+        mGwqpListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            private int mScrollState;
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                mScrollState = scrollState;
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                int lastVisibleItem = firstVisibleItem + visibleItemCount - 1; //可视的最后一个列表项的索引
+                if (mScrollState != AbsListView.OnScrollListener.SCROLL_STATE_IDLE
+                        && lastVisibleItem == totalItemCount - 1) {
+                    remoteFetchGongWenAsync(true);
+                }
+            }
+        });
     }
 
     private class GwListAdapter extends BaseAdapter{
@@ -119,7 +146,7 @@ public class GwqpActivity extends AppCompatActivity implements GwqpTabFragment.O
             holder.laiWenDanwei.setText(String.format(res.getString(R.string.list_text_1), gw.getUNIT1()));
             holder.daiPi.setText(String.format(res.getString(R.string.list_text_2), gw.getSQLEADER()));
             holder.laiWenRiqi.setText(String.format(res.getString(R.string.list_text_3), gw.getDATE1()));
-            holder.leiXing.setText(String.format(res.getString(R.string.list_text_4), gw.getTYPE()));
+            holder.leiXing.setText(String.format(res.getString(R.string.list_text_4), GW_TYPE.get(gw.getTYPE())));
 
             return view;
         }
@@ -166,15 +193,20 @@ public class GwqpActivity extends AppCompatActivity implements GwqpTabFragment.O
 
     @Override
     public void onTabSelected(int index) {
-        Log.d("select tab", "index" + index);
+        mCurrentPageNumber = 1;
+        mCategory = CATEGORY[index];
+        remoteFetchGongWenAsync(false);
     }
 
     @Override
     public void onSwitch(int index) {
         Log.d("switch", "index " + index);
+        mCurrentPageNumber = 1;
+        mStatus = STATUS[index];
+        remoteFetchGongWenAsync(false);
     }
 
-    private void remoteFetchGongWenAsync() {
+    private void remoteFetchGongWenAsync(final boolean appendMode) {
         String token = SharedObject.getToken(this);
         String category = mCategory;
         String status = mStatus;
@@ -187,9 +219,14 @@ public class GwqpActivity extends AppCompatActivity implements GwqpTabFragment.O
             @Override
             public void onResponse(Call<Result> call, Response<Result> response) {
                 if (response.isSuccessful()) {
-                    mGwList = response.body().gwList;
+                    if(appendMode){
+                        mGwList.addAll(response.body().gwList);
+                    }else {
+                        mGwList = response.body().gwList;
+                    }
                     Log.d("gwList", "size: " + mGwList.size());
                     ((BaseAdapter)mGwqpListView.getAdapter()).notifyDataSetChanged();
+                    mCurrentPageNumber++;
                 }
             }
 
