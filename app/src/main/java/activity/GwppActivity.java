@@ -79,6 +79,7 @@ public class GwppActivity extends AppCompatActivity {
 
         init(category);
         fetchData(barcode);
+
     }
 
     private void init(String category) {
@@ -156,6 +157,8 @@ public class GwppActivity extends AppCompatActivity {
             public void onResponse(Call<Result> call, Response<Result> response) {
                 if (response.isSuccessful()) {
                     mResult = response.body();
+                    listContainer.setVisibility(View.VISIBLE);
+                    fillPinshiList(mResult);
                     try {
                         updateText(mResult.gwForm);
                     } catch (IllegalAccessException e) {
@@ -422,4 +425,6 @@ public class GwppActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
