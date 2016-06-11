@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -64,6 +65,8 @@ public class GwqpActivity extends AppCompatActivity implements GwqpTabFragment.O
 
 
 
+
+
 //    Intent intent = getIntent();
 //    final List<Gw> gwList1 = (List<Gw>) intent.getSerializableExtra("gwList");
 //    final String ret = intent.getStringExtra("ret");
@@ -76,8 +79,8 @@ public class GwqpActivity extends AppCompatActivity implements GwqpTabFragment.O
         mGwqpListView = (ListView) findViewById(R.id.gwqp_list);
         initGwqpListView();
         remoteFetchGongWenAsync(false);
-//
-//        initTitle();
+
+        initTitle();
 
     }
 
@@ -91,6 +94,7 @@ public class GwqpActivity extends AppCompatActivity implements GwqpTabFragment.O
         mGwqpListView.setAdapter(new GwListAdapter());
         mGwqpListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             private int mScrollState;
+
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 mScrollState = scrollState;
@@ -103,6 +107,20 @@ public class GwqpActivity extends AppCompatActivity implements GwqpTabFragment.O
                         && lastVisibleItem == totalItemCount - 1) {
                     remoteFetchGongWenAsync(true);
                 }
+            }
+        });
+        mGwqpListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //        Intent intent1 = new Intent(this, GwppActivity.class);
+                //        intent1.putExtra("barcode", "116009070");
+                //        intent1.putExtra("category", "fw");
+                //        startActivity(intent1);
+                Gw gw = mGwList.get(position);
+                Intent intent1 = new Intent(GwqpActivity.this, GwppActivity.class);
+                intent1.putExtra("barcode", gw.getBARCODE());
+                intent1.putExtra("category", gw.getTYPE());
+                startActivity(intent1);
             }
         });
     }
@@ -140,7 +158,7 @@ public class GwqpActivity extends AppCompatActivity implements GwqpTabFragment.O
                 view = convertView;
                 holder = (ViewHolder)view.getTag();
             }
-            Gw gw = (Gw)getItem(position);
+            Gw gw = (Gw) getItem(position);
             holder.gongWenBiaoti.setText(gw.getTITLE());
             Resources res = getResources();
             holder.laiWenDanwei.setText(String.format(res.getString(R.string.list_text_1), gw.getUNIT1()));

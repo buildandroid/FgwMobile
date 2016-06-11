@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import com.example.fgwoa.fgwmobile.R;
 
@@ -31,6 +32,7 @@ import retrofit2.Response;
  */
 public class MainActivity extends AppCompatActivity{
     private static final float ICON_TITLE_SPACE = 50f;
+    private Button mGwqpButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,14 +41,23 @@ public class MainActivity extends AppCompatActivity{
         initLogo();
         initAnimation();
 
+        mGwqpButton = (Button)findViewById(R.id.button3);
+        mGwqpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GwqpActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         Intent intent = getIntent();
         String token = intent.getStringExtra("ret");
 
-        Intent intent1 = new Intent(this, GwppActivity.class);
-        intent1.putExtra("barcode", "116009070");
-        intent1.putExtra("category", "fw");
-        startActivity(intent1);
+//        Intent intent1 = new Intent(this, GwppActivity.class);
+//        intent1.putExtra("barcode", "116009070");
+//        intent1.putExtra("category", "fw");
+//        startActivity(intent1);
 
 //        String serverUrl = getString(R.string.SERVER_URL);
 //        Call<Result> call = RetrofitFactory.getRetorfit().create(RestApi.class).gwQuery(serverUrl + "gwQuery",

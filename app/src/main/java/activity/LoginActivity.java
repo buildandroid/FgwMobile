@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent();
                             intent.setClass(LoginActivity.this, MainActivity.class);
                             intent.putExtra("ret", token);
-                            Toast.makeText(LoginActivity.this, token, Toast.LENGTH_LONG).show();
+//                            Toast.makeText(LoginActivity.this, token, Toast.LENGTH_LONG).show();
                             startActivity(intent);
                         }
                     }
