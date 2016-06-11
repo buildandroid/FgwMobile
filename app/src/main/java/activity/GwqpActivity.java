@@ -1,11 +1,13 @@
 package activity;
 
-import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.example.fgwoa.fgwmobile.R;
@@ -15,13 +17,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import Utils.MyAdapter;
-
 /**
  * Created by wangxiao on 16/6/7.
  */
 public class GwqpActivity extends AppCompatActivity {
-    private ListView listView;
+    private ListView mGwqpListView;
 
 
 //    Intent intent = getIntent();
@@ -32,12 +32,43 @@ public class GwqpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gwqp);
-//        listView = (ListView) findViewById(R.id.gw_list);
-//        List<Map<String, Object>> list = getData();
-//        listView.setAdapter(new MyAdapter(this, list));
+        mGwqpListView = (ListView) findViewById(R.id.gwqp_list);
+        initGwqpListView();
 //
 //        initTitle();
 
+    }
+
+    private void initGwqpListView(){
+        mGwqpListView.setAdapter(new GwListAdapter());
+    }
+
+    private class GwListAdapter extends BaseAdapter{
+        @Override
+        public int getCount() {
+            return 1;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return "";
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 1;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view;
+            if (convertView == null) {
+                view = LayoutInflater.from(getBaseContext()).inflate(R.layout.item_gwqp_list, parent, false);
+            } else {
+                view = convertView;
+            }
+            return view;
+        }
     }
 
     private void initTitle(){
@@ -71,5 +102,7 @@ public class GwqpActivity extends AppCompatActivity {
         }
         return list;
     }
+
+
 
 }
