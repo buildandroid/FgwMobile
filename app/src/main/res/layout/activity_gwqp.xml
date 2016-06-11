@@ -1,10 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gongwen_qianpi_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="126dp"
+        android:background="@drawable/gwqp_list_bg"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
+            <fragment
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:name="fragment.DaiPiYiPiSwitcherFragment"
+                tools:layout="@layout/fragment_dai_pi_yi_pi_switcher"
+                android:layout_marginLeft="58dp"
+                android:layout_marginTop="16dp"
+                android:tag="daipiyipi"
+                />
+
+        </LinearLayout>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/gwqp_list"
+            >
+        </ListView>
+    </LinearLayout>
+
     <fragment
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,4 +46,4 @@
         android:layout_marginTop="50dp"
         android:layout_marginLeft="12dp"
         />
-</LinearLayout>
+</RelativeLayout>

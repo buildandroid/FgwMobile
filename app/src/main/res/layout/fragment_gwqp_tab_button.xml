@@ -44,6 +44,7 @@
         android:src="@drawable/gwqp_arrow"
         android:layout_marginLeft="1dp"
         android:id="@+id/gwqp_btn_indicator"
+        android:visibility="invisible"
         />
 
 </LinearLayout>

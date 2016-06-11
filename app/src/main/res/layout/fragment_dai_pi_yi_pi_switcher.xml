@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragment.DaiPiYiPiSwitcherFragment">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/prompt_pend"
+        android:id="@+id/gwqp_daipi"
+        android:textSize="20sp"
+        android:background="@drawable/gwqp_daipi_btn_bg"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/prompt_approve"
+        android:textSize="20sp"
+        android:layout_toRightOf="@id/gwqp_daipi"
+        android:background="@drawable/gwqp_yipi_btn_bg"
+        android:id="@+id/gwqp_yipi"
+        />
+
+
+</RelativeLayout>

@@ -1,5 +1,6 @@
 package activity;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -70,4 +71,5 @@ public class GwqpActivity extends AppCompatActivity {
         }
         return list;
     }
+
 }

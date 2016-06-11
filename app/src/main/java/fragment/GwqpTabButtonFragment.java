@@ -39,6 +39,7 @@ public class GwqpTabButtonFragment extends Fragment {
     private FrameLayout mGwqpTabBtn;
     private ImageView mGwqpTabBtnIcon;
     private TextView mGwqpTabBtnTxt;
+    private ImageView mGwqpBtnIndicator;
 
     public GwqpTabButtonFragment() {
         // Required empty public constructor
@@ -87,6 +88,7 @@ public class GwqpTabButtonFragment extends Fragment {
         mGwqpTabBtnIcon.setImageResource(mIconResId);
         mGwqpTabBtnTxt = (TextView)rootView.findViewById(R.id.gwqp_btn_txt);
         mGwqpTabBtnTxt.setText(mTxtResId);
+        mGwqpBtnIndicator = (ImageView)rootView.findViewById(R.id.gwqp_btn_indicator);
         updateUIBySelectedState();
         return rootView;
     }
@@ -108,8 +110,10 @@ public class GwqpTabButtonFragment extends Fragment {
         mGwqpTabBtn.setSelected(mIsSelected);
         mGwqpTabBtnIcon.setSelected(mIsSelected);
         mGwqpTabBtnTxt.setSelected(mIsSelected);
+        mGwqpBtnIndicator.setSelected(mIsSelected);
         changeGwqpTabBtnIconColor();
         changeGwqpTabBtnTxtColor();
+        changeGwqpTabBtnIndicatorVisiblity();
     }
 
     private void changeGwqpTabBtnIconColor(){
@@ -125,6 +129,14 @@ public class GwqpTabButtonFragment extends Fragment {
             mGwqpTabBtnTxt.setTextColor(getResources().getColor(R.color.colorPrimary));
         }else{
             mGwqpTabBtnTxt.setTextColor(getResources().getColor(R.color.colorWhite));
+        }
+    }
+
+    private void changeGwqpTabBtnIndicatorVisiblity(){
+        if(mGwqpBtnIndicator.isSelected()){
+            mGwqpBtnIndicator.setVisibility(View.VISIBLE);
+        }else{
+            mGwqpBtnIndicator.setVisibility(View.INVISIBLE);
         }
     }
 
